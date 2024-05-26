@@ -1,8 +1,9 @@
 import './App.css'
 import Header from './components/Header';
 import SecondaryHeader from './components/SecondaryHeader';
-import Test from './components/Test'
+import Test from './components/Test';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
       <Header />
       <SecondaryHeader />
       {/* <Test /> */}
-      <Login />
+      {/* <Login /> */}
+      <Register />
       <h1>Contenido</h1>
     </>
   )
