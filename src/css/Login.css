@@ -1,21 +1,18 @@
-  header {
-    width: 100%;
-    background: #333;
-    color: #fff;
-    text-align: center;
-  }
   
   .login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 100%;
     max-width: 400px;
     padding: 2em;
     background: rgba(45, 45, 45, 0.5);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffffff;
+    margin-top: 70px;
+    margin-left: 450px;
   }
   
   .logo-container {

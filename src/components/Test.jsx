@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
+import '../App.css'
 
 const Test = () => {
   const [products, setProducts] = useState([])
@@ -11,16 +13,24 @@ const Test = () => {
   }, [])
 
   const getProductDB = async()=>{
-    const res = await axios.get(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products`)
-    setProducts(res.data)
-    // setProducts()
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products`)
+      setProducts(res.data)
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   }
+
+  const getProductLink = (id) => {
+    return `/product/${id}`;
+  };
   
   return (
-    <div>
-      {products.map(product=>(<div key={product.id}>
-        <p>{product.name}</p>
-        <p>{product.rarity}</p>
+    <div className='products-container'>
+      {products.map(product=>(<div key={product.product_id} className='product-card'>
+        <p className='product-name'>{product.name}</p>
+        <p className={`product-rarity ${product.rarity.toLowerCase()}`}>{product.rarity}</p>
+        <Link to={getProductLink(product.product_id)} className="product-button">Ver Detalles</Link>
       </div>))}
     </div>
   )
