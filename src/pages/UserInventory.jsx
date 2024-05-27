@@ -2,8 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
 
-import SecondaryHeader from "../components/SecondaryHeader";
-
 const UserInventory = () => {
 	const [userInventory, setUserInventory] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,13 +24,11 @@ const UserInventory = () => {
 
 	// Wait until the information is being brought from DB.
 	if (isLoading) {
-		<SecondaryHeader />;
 		return <h1>CARGANDO...</h1>;
 	}
 
 	return (
 		<>
-			<SecondaryHeader />
 			<h1>HOLA, SOY EL INVENTARIO</h1>
 			{userInventory.map((item) => (
 				<div key={item.inventory_id}>

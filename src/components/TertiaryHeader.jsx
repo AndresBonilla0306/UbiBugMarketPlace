@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../App.css";
 import logoR6 from "../assets/r6s-logo.png";
 
@@ -6,18 +8,18 @@ const TertiaryHeader = () => {
 		<header className="tertiary-header">
 			<img src={logoR6} alt="Logo" className="secondary-header-logo" />
 			<nav className="tertiary-header-nav">
-				<a href="/" className="secondary-header-link">
+				<Link to="/" className="secondary-header-link">
 					Home
-				</a>
-				<a href="/login" className="secondary-header-link">
+				</Link>
+				<Link to="/login" className="secondary-header-link">
 					Iniciar sesión
-				</a>
-				<a href="/register" className="secondary-header-link">
+				</Link>
+				<Link to="/register" className="secondary-header-link">
 					Registrarse
-				</a>
-				<a href="/UserProfile" className="secondary-header-link">
+				</Link>
+				<Link to="/UserProfile" className="secondary-header-link">
 					Perfil
-				</a>
+				</Link>
 			</nav>
 		</header>
 	);

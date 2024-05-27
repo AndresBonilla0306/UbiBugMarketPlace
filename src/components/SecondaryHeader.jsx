@@ -45,6 +45,9 @@ const SecondaryHeader = () => {
 					<Link to="/inventory" className="secondary-header-link">
 						Inventario
 					</Link>
+					<Link to="/userProfile" className="secondary-header-link">
+						Perfil
+					</Link>
 				</nav>
 			</div>
 			<div className="right-navs">
