@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const UserContext = createContext();
 
@@ -31,7 +32,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserDetails = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_USERS_MICROSERVICE}/users/current`);
+      const res = await axios.get(`${import.meta.env.VITE_USERS_MICROSERVICE}/users/${user.user_id}`);
       setUser(res.data);
     } catch (error) {
       console.error("Error fetching user details:", error);

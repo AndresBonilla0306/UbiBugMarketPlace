@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import '../App.css'; 
 import logoR6 from '../assets/r6s-logo.png'
+import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 
 
@@ -12,11 +13,18 @@ const SecondaryHeader = () => {
   const [username, setUsername] = useState('');
   
 
+  const updateMoney = async (amount) => {
+    try {
+      const newMoney = user.money + amount;
+      const res = await axios.put(`${import.meta.env.VITE_USERS_MICROSERVICE}/users/${user.user_id}`, { money: newMoney });
+      setUser(res.data);
+    } catch (error) {
+      console.error("Error updating money:", error);
+    }
+  };
+
   const addMoney = (amount) => {
-    setUser(prevUser => ({
-      ...prevUser,
-      money: prevUser.money + amount
-    }));
+    updateMoney(amount);
   };
 
   useEffect(() => {
