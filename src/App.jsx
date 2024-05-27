@@ -8,6 +8,10 @@ import RegisterPage from './pages/RegisterPage';
 import UserMarketPlace from './pages/UserMarketPlace'
 import UserInventory from './pages/UserInventory.jsx';
 import ProductDetails from './pages/ProductDetails'
+import UserProfile from './pages/UserProfile.jsx';
+import AmdinProfile from './pages/AdminPage.jsx';
+import Crproduct from './pages/CreateProduct.jsx';
+import CrUser from './pages/CreateUser.jsx';
 
 function App() {
 
@@ -23,6 +27,10 @@ function App() {
           <Route path="/usermarket" element={<UserMarketPlace />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/userinven" element={<UserInventory/>} />
+          <Route path="/UserProfile" element={<UserProfile/>} />
+          <Route path="/Admin" element={<AmdinProfile/>} />
+          <Route path="/crProduct" element={<Crproduct/>} />
+          <Route path="/crUser" element={<CrUser/>} />
         </Routes>
       </UserProvider>
     </Router>
