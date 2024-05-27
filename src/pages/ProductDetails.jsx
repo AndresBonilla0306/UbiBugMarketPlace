@@ -21,6 +21,11 @@ const ProductDetails = () => {
     fetchProductDetails();
   }, [id]);
 
+  const handleBuy = () => {
+    // Aquí puedes agregar la lógica para la compra del producto
+    console.log("Producto comprado:", product.name);
+  };
+
   if (!product) {
     return <div className="product-container">Cargando...</div>;
   }
@@ -34,6 +39,7 @@ const ProductDetails = () => {
         <h2>Descripción: {product.description}</h2>
         <h2>Precio: {product.price}$</h2>
         <h2>Rareza: {product.rarity}</h2>
+        <button className="login-button" onClick={handleBuy}>Comprar</button>
       </div>
     </div>
   );
