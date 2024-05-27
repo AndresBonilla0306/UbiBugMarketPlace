@@ -17,9 +17,6 @@ const TertiaryHeader = () => {
 				<Link to="/register" className="secondary-header-link">
 					Registrarse
 				</Link>
-				<Link to="/UserProfile" className="secondary-header-link">
-					Perfil
-				</Link>
 			</nav>
 		</header>
 	);

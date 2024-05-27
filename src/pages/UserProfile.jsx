@@ -4,6 +4,7 @@ import axios from "axios";
 
 import "../css/UserProfile.css";
 import Solis from "../assets/solis.png";
+import BuyCredits from "../components/BuyCredits";
 
 const UserProfile = () => {
 	const [userInformation, setUserInformation] = useState({
@@ -53,6 +54,7 @@ const UserProfile = () => {
 					<img src={Solis} alt="Solis" className="Solis" />
 				</div>
 			</div>
+			<BuyCredits />
 		</div>
 	);
 };
