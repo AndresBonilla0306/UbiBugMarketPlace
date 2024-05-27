@@ -1,0 +1,28 @@
+.product-container {
+    min-height: 75vh;
+    
+  }
+
+  .product-details {
+    background: rgba(45, 45, 45, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 10 400px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+
+    margin-left: 450px;
+  }
+  
+  .product-details h1,
+  .product-details h2 {
+    margin: 8px 0;
+  }
+  
+  .product-details h1 {
+    color: #82c5ff;
+  }
+  
+  .product-details h2 {
+    color: #ffffff;
+  }
+  
