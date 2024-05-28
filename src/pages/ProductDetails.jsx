@@ -1,11 +1,27 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import axios from "axios";
+import Swal from "sweetalert2";
+import { UserContext } from "../context/UserContext";
+
 import "../css/Product.css";
 
 const ProductDetails = () => {
 	const { id } = useParams();
-	const [product, setProduct] = useState(null);
+	const [product, setProduct] = useState({
+		product_id: null,
+		name: null,
+		description: null,
+		image: null,
+		price: null,
+		rarity: null,
+		rarity_id: null,
+	});
+
+	const { user, getUserDetailsFromDB } = useContext(UserContext);
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchProductDetails = async () => {
@@ -20,8 +36,38 @@ const ProductDetails = () => {
 		fetchProductDetails();
 	}, [id]);
 
-	const handleBuy = () => {
-		// Aquí puedes agregar la lógica para la compra del producto
+	const handleBuy = async () => {
+		// 1.  Verificar que el usuario puede comprar el producto
+		if (user.money < product.price) {
+			await Swal.fire({
+				title: "No tienes suficiente dinero",
+				text: `No posees la cantidad suficiente de dinero para comprar este producto. Te hace falta ${
+					product.price - user.money
+				} CP para adquirla.`,
+				icon: "error",
+				confirmButtonText: "Entendido",
+			});
+		}
+
+		// 2. Si tiene dinero disponible, hacer la petición al servidor para añadir el arma al inventario
+		const res = await axios.post(`${import.meta.env.VITE_INVENTORIES_MICROSERVICE}/inventories`, {
+			user_id: user.user_id,
+			product_id: product.product_id,
+		});
+
+		// 3. Actualizar información del usuario
+		await getUserDetailsFromDB();
+
+		await Swal.fire({
+			title: "Artículo comprado correctamente",
+			text: `Disfruta de tu nueva adquicisión: ${res.data.product_name}`,
+			icon: "success",
+			confirmButtonText: "Entendido",
+		});
+
+		console.log(res);
+		navigate("/usermarket");
+
 		console.log("Producto comprado:", product.name);
 	};
 

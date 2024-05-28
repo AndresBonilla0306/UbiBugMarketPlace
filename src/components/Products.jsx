@@ -29,6 +29,7 @@ const Products = () => {
 				<div key={product.product_id} className="product-card">
 					<p className="product-name">{product.name}</p>
 					<p className={`product-rarity ${product.rarity.toLowerCase()}`}>{product.rarity}</p>
+					<p>Precio: ${product.price}</p>
 					<Link to={getProductLink(product.product_id)} className="product-button">
 						Ver Detalles
 					</Link>
