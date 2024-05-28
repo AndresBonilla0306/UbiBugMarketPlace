@@ -48,13 +48,13 @@ const BuyCredits = () => {
 			<div className="right-navs">
 				<div className="money-container">
 					<button className="money-button" onClick={() => addMoney(10)}>
-						Sumar 10
+						Comprar 10 CR
 					</button>
 					<button className="money-button" onClick={() => addMoney(50)}>
-						Sumar 50
+						Comprar 50 CR
 					</button>
 					<button className="money-button" onClick={() => addMoney(100)}>
-						Sumar 100
+						Comprar 100 CR
 					</button>
 				</div>
 			</div>

@@ -33,7 +33,7 @@ const SecondaryHeader = () => {
 					</Link>
 					<p className="money-display">Dinero: ${user.money}</p>
 					<div className="user-info">
-						<p className="username-display">{username}</p>
+						{/* <p className="username-display">{username}</p> */}
 						<button className="logout-button" onClick={logout}>
 							Cerrar sesión
 						</button>
