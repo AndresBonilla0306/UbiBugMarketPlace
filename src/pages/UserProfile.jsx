@@ -43,16 +43,18 @@ const UserProfile = () => {
 			<div className="home-container">
 				<div className="left-container">
 					<h1>Bienvenido {userInformation.username}</h1>
-					<h4>Aquí encontrarás tu información personal. <br />
-						Si necesitas comprar créditos para tus futuras compras, presiona uno de los botones con la cantidad deseada.
+					<h4>
+						Aquí encontrarás tu información personal. <br />
+						Si necesitas comprar créditos para tus futuras compras, presiona uno de los botones con la
+						cantidad deseada.
 					</h4>
 					<div className="inner-container">
 						<div className="user-info-container">
 							<div className="user-info">
-								<p><h3>EMAIL: {userInformation.email}</h3></p>
-								<p><h3>DINERO: {userInformation.money}</h3></p>
-								<p><h3>RANGO DE COMPRADOR: {userInformation.customer_rank}</h3></p>
-								<p><h3>TIPO DE USUARIO: {userInformation.type_user}</h3></p>
+								<h3>EMAIL: {userInformation.email}</h3>
+								<h3>DINERO: {userInformation.money}</h3>
+								<h3>RANGO DE COMPRADOR: {userInformation.customer_rank}</h3>
+								<h3>TIPO DE USUARIO: {userInformation.type_user}</h3>
 							</div>
 						</div>
 						<div className="BuyCRS-container">
