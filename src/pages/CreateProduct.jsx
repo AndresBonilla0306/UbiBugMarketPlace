@@ -1,14 +1,108 @@
-import React from 'react';
-import '../App.css';
-import AdminHeader from '../components/AdminHeader';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
+
+import "../App.css";
 
 const CreateProduct = () => {
-  return (
-    <div>
-        <AdminHeader/>
-        <h1></h1>
-    </div>
-  );
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+	const [rarities, setRarities] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		getRaritiesDB();
+	}, []);
+
+	const getRaritiesDB = async () => {
+		try {
+			const res = await axios.get(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/rarities`);
+			setRarities(res.data);
+			setIsLoading(false);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const onSubmit = async (data) => {
+		try {
+			console.log(data);
+
+			// TODO: IMAGEN
+			data.image = "test-URL";
+			const res = await axios.post(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products`, data);
+			console.log(res);
+			if (res.status === 201) {
+				await Swal.fire({
+					title: "Producto creado exitosamente",
+					text: `Producto ${data.name} creado correctamente`,
+					icon: "success",
+					confirmButtonText: "Continuar",
+				});
+
+				navigate("/usermarket");
+				return;
+			}
+			console.log("No debería aparecer");
+		} catch (error) {
+			await Swal.fire({
+				title: "Error en el formulario",
+				text: error.response.data.msg,
+				icon: "error",
+				confirmButtonText: "Continuar",
+			});
+		}
+	};
+
+	if (isLoading) {
+		return (
+			<>
+				<h1>Cargando...</h1>
+			</>
+		);
+	}
+
+	return (
+		<>
+			<h1>CREATE PRODUCT</h1>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<div>
+					<label htmlFor="name">Name:</label>
+					<input id="name" {...register("name", { required: true })} />
+					{errors.name && <p>Name is required.</p>}
+				</div>
+				<div>
+					<label htmlFor="description">Description:</label>
+					<input id="description" {...register("description", { required: true })} />
+					{errors.description && <p>Description is required.</p>}
+				</div>
+				<div>
+					<label htmlFor="price">Price:</label>
+					<input type="number" id="price" {...register("price", { required: true })} />
+					{errors.price && <p>Price is required.</p>}
+				</div>
+				<div>
+					<label htmlFor="rarity">Rarity:</label>
+					<select id="rarity" {...register("rarity", { required: true })}>
+						{rarities.map((rarity) => (
+							<option key={rarity.rarity_id} value={rarity.rarity_id}>
+								{rarity.name}
+							</option>
+						))}
+					</select>
+					{errors.rarity && <p>Rarity is required.</p>}
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</>
+	);
 };
 
 export default CreateProduct;

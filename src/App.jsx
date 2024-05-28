@@ -31,12 +31,12 @@ function App() {
 							<Route path="/product/:id" element={<ProductDetails />} />
 							<Route path="/inventory" element={<UserInventory />} />
 							<Route path="/userProfile" element={<UserProfile />} />
-						</Route>
 
-						{/* ADMIN ROUTES */}
-						<Route path="/Admin" element={<AmdinProfile />} />
-						<Route path="/crProduct" element={<Crproduct />} />
-						<Route path="/crUser" element={<CrUser />} />
+							{/* ADMIN ROUTES */}
+							<Route path="/Admin" element={<AmdinProfile />} />
+							<Route path="/create/product" element={<Crproduct />} />
+							<Route path="/create/user" element={<CrUser />} />
+						</Route>
 					</Routes>
 				</UserProvider>
 			</Router>
