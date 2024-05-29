@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 import BIce from "../assets/BIce.png";
-import "../css/CreateProduct.css"; 
+import "../css/CreateProduct.css";
 
 const CreateProduct = () => {
 	const {
@@ -35,11 +35,30 @@ const CreateProduct = () => {
 	const onSubmit = async (data) => {
 		try {
 			console.log(data);
+			// Preparar información para enviar imagen y datos al servidor
+			const formData = new FormData();
+			formData.append("name", data.name);
+			formData.append("description", data.description);
+			formData.append("price", data.price);
+			formData.append("rarity", data.rarity);
+
+			console.log(data.image);
+			console.log(data.image[0]);
+
+			// Asegúrate de verificar que se haya seleccionado una imagen
+			if (data.image[0]) {
+				formData.append("image", data.image[0]);
+			}
 
 			// TODO: IMAGEN
-			data.image = "test-URL";
-			const res = await axios.post(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products`, data);
+			// data.image = "test-URL";
+			const res = await axios.post(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products`, formData, {
+				"Content-Type": "multipart/form-data",
+			});
+
+			// const res = await axios.post(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products`, data);
 			console.log(res);
+
 			if (res.status === 201) {
 				await Swal.fire({
 					title: "Producto creado exitosamente",
@@ -102,6 +121,9 @@ const CreateProduct = () => {
 							</select>
 							{errors.rarity && <p>Rarity is required.</p>}
 						</div>
+						<label htmlFor="image">Image:</label>
+						<input type="file" id="image" {...register("image", { required: true })} />
+						{errors.image && <p>Image is required.</p>}
 						<button type="submit">Crear Prod</button>
 					</form>
 				</div>
