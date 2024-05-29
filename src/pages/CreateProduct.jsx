@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-import "../App.css";
+import BIce from "../assets/BIce.png";
+import "../css/CreateProduct.css"; 
 
 const CreateProduct = () => {
 	const {
@@ -70,38 +71,45 @@ const CreateProduct = () => {
 	}
 
 	return (
-		<>
-			<h1>CREATE PRODUCT</h1>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div>
-					<label htmlFor="name">Name:</label>
-					<input id="name" {...register("name", { required: true })} />
-					{errors.name && <p>Name is required.</p>}
+		<div className="container">
+			<div className="left-side">
+				<div className="form-container">
+					<h1>CREAR PRODUCTO</h1>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<div>
+							<label htmlFor="name">Nombre:</label>
+							<input id="name" {...register("name", { required: true })} />
+							{errors.name && <p>Name is required.</p>}
+						</div>
+						<div>
+							<label htmlFor="description">Descripción:</label>
+							<input id="description" {...register("description", { required: true })} />
+							{errors.description && <p>Description is required.</p>}
+						</div>
+						<div>
+							<label htmlFor="price">Precio:</label>
+							<input type="number" id="price" {...register("price", { required: true })} />
+							{errors.price && <p>Price is required.</p>}
+						</div>
+						<div>
+							<label htmlFor="rarity">Rareza:</label>
+							<select id="rarity" {...register("rarity", { required: true })}>
+								{rarities.map((rarity) => (
+									<option key={rarity.rarity_id} value={rarity.rarity_id}>
+										{rarity.name}
+									</option>
+								))}
+							</select>
+							{errors.rarity && <p>Rarity is required.</p>}
+						</div>
+						<button type="submit">Crear Prod</button>
+					</form>
 				</div>
-				<div>
-					<label htmlFor="description">Description:</label>
-					<input id="description" {...register("description", { required: true })} />
-					{errors.description && <p>Description is required.</p>}
-				</div>
-				<div>
-					<label htmlFor="price">Price:</label>
-					<input type="number" id="price" {...register("price", { required: true })} />
-					{errors.price && <p>Price is required.</p>}
-				</div>
-				<div>
-					<label htmlFor="rarity">Rarity:</label>
-					<select id="rarity" {...register("rarity", { required: true })}>
-						{rarities.map((rarity) => (
-							<option key={rarity.rarity_id} value={rarity.rarity_id}>
-								{rarity.name}
-							</option>
-						))}
-					</select>
-					{errors.rarity && <p>Rarity is required.</p>}
-				</div>
-				<button type="submit">Submit</button>
-			</form>
-		</>
+			</div>
+			<div className="right-side">
+				<img src={BIce} alt="BIce" className="BIce" />
+			</div>
+		</div>
 	);
 };
 

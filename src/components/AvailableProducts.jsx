@@ -30,17 +30,19 @@ const AvailableProducts = () => {
 	};
 
 	return (
-		<div className="products-container">
-			{products.map((product) => (
-				<div key={product.product_id} className="product-card">
-					<p className="product-name">{product.name}</p>
-					<p className={`product-rarity ${product.rarity.toLowerCase()}`}>{product.rarity}</p>
-					<p>Precio: ${product.price}</p>
-					<Link to={getProductLink(product.product_id)} className="product-button">
-						Ver Detalles
-					</Link>
-				</div>
-			))}
+		<div className="products-container-wrapper">
+			<div className="products-container">
+				{products.map((product) => (
+					<div key={product.product_id} className="product-card">
+						<p className="product-name">Nombre: {product.name}</p>
+						<p className={`product-rarity ${product.rarity.toLowerCase()}`}>Rareza: {product.rarity}</p>
+						<p>Fecha de obtención: {product.obtained_at}</p>
+						<Link to={getProductLink(product.product_id)} className="product-button">
+							Ver Detalles
+						</Link>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
