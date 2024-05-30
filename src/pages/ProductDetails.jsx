@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { UserContext } from "../context/UserContext";
 
 import "../css/Product.css";
+import Spinner from "../components/Spinner";
 
 const ProductDetails = () => {
 	const { id } = useParams();
@@ -18,6 +19,7 @@ const ProductDetails = () => {
 		rarity: null,
 		rarity_id: null,
 	});
+	const [isLoading, setIsLoading] = useState(true);
 
 	const { user, getUserDetailsFromDB } = useContext(UserContext);
 
@@ -26,10 +28,20 @@ const ProductDetails = () => {
 	useEffect(() => {
 		const fetchProductDetails = async () => {
 			try {
+				setIsLoading(true);
 				const res = await axios.get(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products/${id}`);
 				setProduct(res.data);
+				setIsLoading(false);
 			} catch (error) {
 				console.error("Error fetching product details:", error);
+				await Swal.fire({
+					title: "Error en el formulario",
+					text: error.response.data.msg,
+					icon: "error",
+					confirmButtonText: "Continuar",
+				});
+				navigate("/usermarket");
+				setIsLoading(false);
 			}
 		};
 
@@ -71,21 +83,57 @@ const ProductDetails = () => {
 		console.log("Producto comprado:", product.name);
 	};
 
+	const handleDeleteProduct = async () => {
+		try {
+			axios.delete(`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products/${product.product_id}`);
+
+			await Swal.fire({
+				title: "Artículo eliminado correctamente",
+				text: `El producto ha sido eliminado con éxito.`,
+				icon: "success",
+				confirmButtonText: "Entendido",
+			});
+
+			navigate("/usermarket");
+		} catch (error) {
+			await Swal.fire({
+				title: "Error en el formulario",
+				text: error.response.data.msg,
+				icon: "error",
+				confirmButtonText: "Continuar",
+			});
+		}
+	};
+
 	if (!product) {
 		return <div className="product-container">Cargando...</div>;
+	}
+
+	if (isLoading) {
+		return <Spinner />;
 	}
 
 	return (
 		<div className="product-container">
 			<div className="product-details">
+				{product.image !== null ? (
+					<img className="product-image" src={product.image}></img>
+				) : (
+					<p>No image :P</p>
+				)}
 				<h1>Detalles del Producto {product.id}</h1>
 				<h1>Nombre: {product.name}</h1>
 				<h2>Descripción: {product.description}</h2>
 				<h2>Precio: {product.price}$</h2>
 				<h2>Rareza: {product.rarity}</h2>
-				<button className="login-button" onClick={handleBuy}>
-					Comprar
-				</button>
+
+				{user.type_user === "USER" ? (
+					<button className="login-button" onClick={handleBuy}>
+						Comprar
+					</button>
+				) : (
+					<button onClick={handleDeleteProduct}>Eliminar</button>
+				)}
 			</div>
 		</div>
 	);
