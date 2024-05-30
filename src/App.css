@@ -91,15 +91,17 @@ body {
 .products-container-wrapper {
   display: flex;
   justify-content: center; 
+  align-items: center; 
+  height: 60vh; 
   padding: 20px;
 }
 
 .products-container {
   display: flex;
   justify-content: center; 
+  align-items: center; 
   flex-wrap: wrap;
-  gap: 20px; 
-  
+  gap: 30px;
 }
 
 .product-card {
@@ -109,13 +111,22 @@ body {
   text-align: center; 
   background: rgba(45, 45, 45, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 }
 
-.product-card {
-  border-radius: 8px;
-  padding: 15px;
-  width: 200px;
-  text-align: center;
+.product-image {
+  width: 100%; 
+  height: 100px;
+  width: 400px; 
+  object-fit: cover; 
+}
+
+.product-name,
+.product-rarity,
+.product-button {
+  margin: 10px 0;
 }
 
 .product-name {
@@ -126,8 +137,9 @@ body {
 
 .product-rarity {
   font-size: 1em;
-  padding: 5px;
-  border-radius: 4px;
+  padding: 10px 8px;
+  width: 200px; 
+  
 }
 
 .product-rarity.común {
@@ -153,17 +165,17 @@ body {
 .product-button {
   display: inline-block;
   margin-top: 10px;
-  padding: 10px 15px;
+  padding: 10px 8px;
+  width: 200px; 
   background-color: #2499ff;
   color: white;
   text-decoration: none;
-  border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .product-button:hover {
-  background-color: white;
-  color: #22aab1;
+  background-color: #1e80d6;
+  color: white;
 }
 
 .money-container {

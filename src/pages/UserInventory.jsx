@@ -40,7 +40,7 @@ const UserInventory = () => {
 	}
 
 	return (
-		<>
+		<div className="container">
 			<h1 className="title">
 				Este es tu inventario<br></br>
 				Aquí encontraras todos tus productos comprados
@@ -59,7 +59,7 @@ const UserInventory = () => {
 					</div>
 				))}
 			</div>
-		</>
+		</div>
 	);
 };
 

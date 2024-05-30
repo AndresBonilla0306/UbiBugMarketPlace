@@ -49,7 +49,7 @@ const AvailableProducts = () => {
 						)}
 						<p className="product-name">Nombre: {product.name}</p>
 						<p className={`product-rarity ${product.rarity.toLowerCase()}`}>Rareza: {product.rarity}</p>
-						<p>Fecha de obtención: {product.obtained_at}</p>
+						{/* <p>Fecha de obtención: {product.obtained_at}</p> */}
 						<Link to={getProductLink(product.product_id)} className="product-button">
 							Ver Detalles
 						</Link>

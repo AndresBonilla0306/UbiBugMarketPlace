@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-import BIce from "../assets/BIce.png";
 import "../css/CreateProduct.css";
 
 const CreateProduct = () => {
@@ -92,6 +91,7 @@ const CreateProduct = () => {
 	return (
 		<div className="container">
 			<div className="left-side">
+				
 				<div className="form-container">
 					<h1>CREAR PRODUCTO</h1>
 					<form onSubmit={handleSubmit(onSubmit)}>
@@ -121,17 +121,15 @@ const CreateProduct = () => {
 							</select>
 							{errors.rarity && <p>Rarity is required.</p>}
 						</div>
-						<label htmlFor="image">Image:</label>
+						<label htmlFor="image">Imagen:</label>
 						<input type="file" id="image" {...register("image", { required: true })} />
 						{errors.image && <p>Image is required.</p>}
-						<button type="submit">Crear Prod</button>
+						<button type="submit">Crear Producto</button>
 					</form>
 				</div>
 			</div>
-			<div className="right-side">
-				<img src={BIce} alt="BIce" className="BIce" />
-			</div>
 		</div>
+		
 	);
 };
 
