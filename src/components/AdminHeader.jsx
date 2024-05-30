@@ -8,8 +8,8 @@ const AdminHeader = () => {
 		<header className="tertiary-header">
 			<img src={logoR6} alt="Logo" className="secondary-header-logo" />
 			<nav className="tertiary-header-nav">
-				<Link to="/" className="secondary-header-link">
-					Home
+				<Link to="/usermarket" className="secondary-header-link">
+					All products
 				</Link>
 				<Link to="/create/product" className="secondary-header-link">
 					Crear Producto

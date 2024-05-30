@@ -5,6 +5,7 @@ import axios from "axios";
 import "../css/UserProfile.css";
 import Solis from "../assets/solis.png";
 import BuyCredits from "../components/BuyCredits";
+import Spinner from "../components/Spinner";
 
 const UserProfile = () => {
 	const [userInformation, setUserInformation] = useState({
@@ -35,7 +36,7 @@ const UserProfile = () => {
 
 	// Wait until the information is being brought from DB.
 	if (isLoading) {
-		return <h1>CARGANDO...</h1>;
+		return <Spinner />;
 	}
 
 	return (

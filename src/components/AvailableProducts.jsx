@@ -4,9 +4,11 @@ import axios from "axios";
 
 import { UserContext } from "../context/UserContext";
 import "../App.css";
+import Spinner from "./Spinner";
 
 const AvailableProducts = () => {
 	const [products, setProducts] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const { user } = useContext(UserContext);
 
@@ -16,10 +18,12 @@ const AvailableProducts = () => {
 
 	const getProductDB = async () => {
 		try {
+			setIsLoading(true);
 			const res = await axios.get(
 				`${import.meta.env.VITE_PRODUCTS_MICROSERVICE}/products/available/${user.username}`
 			);
 			setProducts(res.data);
+			setIsLoading(false);
 		} catch (error) {
 			console.error("Error fetching products:", error);
 		}
@@ -28,6 +32,10 @@ const AvailableProducts = () => {
 	const getProductLink = (id) => {
 		return `/product/${id}`;
 	};
+
+	if (isLoading) {
+		return <Spinner />;
+	}
 
 	return (
 		<div className="products-container-wrapper">
